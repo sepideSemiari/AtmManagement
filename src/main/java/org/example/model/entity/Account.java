@@ -15,6 +15,7 @@ public class Account extends BaseEntity {
     private CardStatus cardStatus;
     private Timestamp issueDate;
     private Timestamp expireDate;
+    private String Transaction;
 
 
 }

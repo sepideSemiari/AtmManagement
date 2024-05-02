@@ -17,5 +17,5 @@ public class AccountDto {
     private double balance;
     private CardStatus cardStatus;
     private Timestamp issueDate;
-
+    private String Transaction;
 }

@@ -37,5 +37,8 @@ public class AccountController {
     public Double balance(String accountNumber) {
         return accountService.balance(accountNumber);
     }
+    public List<String>transaction(){
+        return accountService.transaction();
+    }
 
 }

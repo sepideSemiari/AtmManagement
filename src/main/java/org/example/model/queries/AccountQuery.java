@@ -58,6 +58,12 @@ public class AccountQuery {
             where accountNumber=?
             """;
 
+    public final static String Transaction= """
+            select Transaction
+            from tb_account
+            where accountNumber=?
+            """;
+
 
 }
 

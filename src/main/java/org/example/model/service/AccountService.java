@@ -7,6 +7,7 @@ import org.example.model.exception.AccountException;
 import org.example.model.repository.AccountRepo;
 import org.example.util.Regex;
 
+import java.lang.runtime.TemplateRuntime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,5 +84,8 @@ public class AccountService {
     public Double balance(String accountNumber) {
 
         return (repo.getBalance(accountNumber));
+    }
+    public  List<String> transaction(){
+        return repo.Transaction();
     }
 }

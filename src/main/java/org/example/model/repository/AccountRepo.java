@@ -111,6 +111,21 @@ public class AccountRepo {
         return accounts;
     }
 
+    public List<String> Transaction() {
+        List<String> transaction = new ArrayList<>();
+        try (Connection connection = JDBC.getConnection();
+             PreparedStatement ps = connection.prepareStatement(AccountQuery.Transaction);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()){
+                transaction.add(String.valueOf(rs));
+            }
+
+        } catch (SQLException e) {
+            handleSQLException("error" + e.getMessage(), e);
+        }
+        return transaction;
+    }
+
     public Double getBalance(String accountNumber) {
         try (Connection connection = JDBC.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(AccountQuery.All_Balance_Query)) {
