@@ -102,17 +102,23 @@ public class UserRepo {
         return userList;
     }
 
-    public Role login(String nationalCode, String password) {
+    public Role login(String national_code, String password) {
         Role role = null;
         try (Connection con = JDBC.getConnection();
              PreparedStatement ps = con.prepareStatement(UserQuery.LOGIN_QUERY)) {
-            ps.setString(1, nationalCode);
+            ps.setString(1, national_code);
             ps.setString(2, password);
 
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                role = Role.valueOf(rs.getString("role"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    role = Role.valueOf(rs.getString("role"));
+
+                } else {
+                    System.out.println("no user found");
+                }
             }
+
+
         } catch (SQLException e) {
             handleSQLException("Error retrieving users: " + e.getMessage(), e);
         }
@@ -132,13 +138,13 @@ public class UserRepo {
         return user;
     }
 
-    public void changePassword(String numberCard, String nationalCode, String newPassword) {
+    public void changePassword(String numberCard, String national_code, String newPassword) {
         Role role = null;
         try (Connection con = JDBC.getConnection();
              PreparedStatement ps = con.prepareStatement(UserQuery.CHANGE_PASS_QUERY)) {
             ps.setString(1, newPassword);
             ps.setString(2, numberCard);
-            ps.setString(3, nationalCode);
+            ps.setString(3, national_code);
 
             ps.executeUpdate();
         } catch (SQLException e) {

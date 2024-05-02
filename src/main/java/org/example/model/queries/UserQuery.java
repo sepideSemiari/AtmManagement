@@ -60,7 +60,7 @@ public class UserQuery {
     public final static String LOGIN_QUERY = """
             select role
             from tb_user
-            where numberCard = ? and password = ?
+            where notional_code = ? and password = ?
             """;
 
 

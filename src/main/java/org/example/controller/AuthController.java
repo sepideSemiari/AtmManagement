@@ -17,8 +17,8 @@ public class AuthController {
         service.register(dto);
     }
 
-    public Role login(String nationalCode, String password) {
-        return service.login(nationalCode, password);
+    public Role login(String national_code, String password) {
+        return service.login(national_code, password);
     }
 
     public void forgotPass(String numberCard, String nationalCode, String password) {

@@ -181,7 +181,7 @@ public class Menu {
         authController.register(dto);
     }
 
-    private static void customerMenu() {
+    private static void customerMenu() throws Exception {
         aa:
         while (true) {
             System.out.println("""
@@ -210,6 +210,7 @@ public class Menu {
                     transfer(yourAccountNumber, destinationCardNumber, amount);
                 case "3":
                     System.out.println("your last ten transaction");
+                    history();
                 case "4":
                     System.out.println("please enter your numberCard,nationalCode,new password");
                     String numberCard = sc.next();
@@ -225,12 +226,25 @@ public class Menu {
         }
     }
 
-    private static double transfer(String yourAccountNumber, String destinationCardNumber, double amount) {
+    private static void history() {
+        String[] history=new String[10];
+        int indexHistory=0;
+    }
+
+    private static double transfer(String yourAccountNumber, String destinationCardNumber, double amount) throws Exception {
         double yourBalance = accountController.balance(yourAccountNumber);
-        double yourAmount = yourBalance - amount;
         double destinationBalance = accountController.balance(destinationCardNumber);
-        double destinationAmount = destinationBalance + amount;
-        return yourAmount;
+
+        if (yourBalance>=amount) {
+            double yourAmount = yourBalance - amount;
+            double destinationAmount = destinationBalance + amount;
+            System.out.println("process is successfully!");
+            return yourAmount;
+
+        }
+        else {
+            throw new Exception("process is not enough");
+        }
     }
 
 

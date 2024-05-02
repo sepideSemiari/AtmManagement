@@ -49,8 +49,8 @@ public class AuthService {
         }
     }
 
-    public Role login(String nationalCode, String password) {
-        return repo.login(nationalCode, password);
+    public Role login(String national_code, String password) {
+        return repo.login(national_code, password);
     }
 
     public void forgotPass(String numberCard, String nationalCode, String newPassword) {
