@@ -23,9 +23,9 @@ public class AuthService {
     }
 
     private void baseValidation(User user) {
-        if (!(user.getFirstName().matches(Regex.name) &&
-                user.getLastName().matches(Regex.lastName) &&
-                user.getNationalCode().matches(Regex.National_Code))) {
+        if (!(user.getFirstName().matches(Regex.name)) &&
+                !(user.getLastName().matches(Regex.lastName)) &&
+                !(user.getNationalCode().matches(Regex.National_Code))) {
             throw new UserException("Invalid input");
         }
     }

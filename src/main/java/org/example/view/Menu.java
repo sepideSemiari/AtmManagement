@@ -5,6 +5,7 @@ import org.example.controller.AuthController;
 import org.example.controller.UserController;
 import org.example.model.dtos.UserDto;
 import org.example.model.entity.Role;
+import org.example.model.entity.User;
 import org.example.model.exception.AccountException;
 
 import java.util.Random;
@@ -166,18 +167,18 @@ public class Menu {
     private static void register() {
         System.out.println("""
                 please enter your data like sample
-                nationalCode,firstName,lastName,password,role,cardNumber
+                nationalCode,firstName,lastName,password,role
                 """);
+        User user=new User();
+
 
         String[] input = sc.next().split(",");
-        input[5] = generateRandomCardNumber();
         UserDto dto = new UserDto();
         dto.setNationalCode(input[0]);
         dto.setFirstName(input[1]);
         dto.setLastName(input[2]);
         dto.setPassword(input[3]);
         dto.setRole(Role.valueOf(input[4]));
-        dto.setCardNumber(input[5]);
         authController.register(dto);
     }
 
@@ -261,15 +262,5 @@ public class Menu {
 
     }
 
-    public static String generateRandomCardNumber() {
-        Random random = new Random();
-        StringBuilder accountNumber = new StringBuilder();
-        int firstDigit = random.nextInt(9) + 1;
-        accountNumber.append(firstDigit);
-        for (int i = 1; i < 16; i++) {
-            int digit = random.nextInt(10);
-            accountNumber.append(digit);
-        }
-        return accountNumber.toString();
-    }
+
 }
