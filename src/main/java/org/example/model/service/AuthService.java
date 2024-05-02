@@ -38,6 +38,7 @@ public class AuthService {
         user.setFirstName(dto.getFirstName());
         user.setLastName(dto.getLastName());
         user.setCardNumber(dto.getCardNumber());
+        user.setAddress(dto.getAddress());
         user.setRole(dto.getRole());
         user.setPassword(dto.getPassword());
         return user;

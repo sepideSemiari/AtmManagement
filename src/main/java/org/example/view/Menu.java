@@ -8,6 +8,7 @@ import org.example.model.entity.Role;
 import org.example.model.entity.User;
 import org.example.model.exception.AccountException;
 
+import java.sql.Timestamp;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -160,6 +161,7 @@ public class Menu {
         dto.setRole(Role.valueOf(input[4]));
         dto.setId(Long.parseLong(input[5]));
         dto.setCardNumber(input[6]);
+        dto.setAddress(input[7]);
         userController.update(dto);
 
     }
@@ -167,10 +169,8 @@ public class Menu {
     private static void register() {
         System.out.println("""
                 please enter your data like sample
-                nationalCode,firstName,lastName,password,role
+                nationalCode,firstName,lastName,password,role,address
                 """);
-        User user=new User();
-
 
         String[] input = sc.next().split(",");
         UserDto dto = new UserDto();
@@ -179,6 +179,8 @@ public class Menu {
         dto.setLastName(input[2]);
         dto.setPassword(input[3]);
         dto.setRole(Role.valueOf(input[4]));
+        dto.setAddress(input[5]);
+
         authController.register(dto);
     }
 

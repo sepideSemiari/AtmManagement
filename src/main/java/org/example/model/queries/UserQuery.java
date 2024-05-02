@@ -2,17 +2,17 @@ package org.example.model.queries;
 
 public class UserQuery {
     public final static String CREATE_TABLE = """
-            create table if not exists tb_user(
-            id  serial,
-            register_date timestamp with time zone,
-            national_code varchar(10),
-            firstName varchar(50),
-            lastName varchar(50),
-            password varchar(50),
-            address varchar(200),
-            role varchar(20),
-            numberCard varchar(16) primary key
-            )
+                CREATE TABLE IF NOT EXISTS tb_user (
+                    id SERIAL,
+                    register_date TIMESTAMP WITH TIME ZONE,
+                    national_code VARCHAR(10),
+                    firstName VARCHAR(50),
+                    lastName VARCHAR(50),
+                    password VARCHAR(50),
+                    address VARCHAR(200),
+                    role VARCHAR(20),
+                    numberCard VARCHAR(16) PRIMARY KEY DEFAULT LPAD(CAST(FLOOR(RANDOM() * 10000000000000000) AS VARCHAR), 16, '1') NOT NULL
+                )
             """;
 
     public final static String SAVE_QUERY = """
@@ -24,7 +24,7 @@ public class UserQuery {
             password,
             address,
             role,
-            noCard)
+            numberCard)
             values(?,?,?,?,?,?,?,?)
             """;
 
@@ -36,7 +36,7 @@ public class UserQuery {
                    password=?,
                    address=?,
                    role=?,
-                   noCard=?
+                   numberCard=?
              where id=?
 
             """;

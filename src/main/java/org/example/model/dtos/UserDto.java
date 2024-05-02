@@ -21,5 +21,6 @@ public class UserDto {
     private String password;
     private String cardNumber;
     private Role role;
+    private String address;
 
 }

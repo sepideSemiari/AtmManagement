@@ -40,7 +40,8 @@ public class UserRepo {
         ps.setString(4, user.getLastName());
         ps.setString(5, user.getPassword());
         ps.setString(6, String.valueOf(user.getRole()));
-        ps.setString(7, user.getCardNumber());
+        ps.setString(7,user.getAddress());
+        ps.setString(8, user.getCardNumber());
     }
 
     public void update(User user) {
@@ -61,6 +62,7 @@ public class UserRepo {
         ps.setString(5, String.valueOf(user.getRole()));
         ps.setLong(6, user.getId());
         ps.setString(7, user.getCardNumber());
+        ps.setString(8,user.getAddress());
     }
 
     public void delete(long id) {
@@ -102,25 +104,29 @@ public class UserRepo {
         return userList;
     }
 
-
-    public Role login(String national_code, String password){
+    public Role login(String national_code, String password) {
         Role role = null;
-        try(Connection con = JDBC.getConnection();
-        PreparedStatement ps = con.prepareStatement(UserQuery.LOGIN_QUERY)){
-            ps.setString(1,national_code);
-            ps.setString(2,password);
+        try (Connection con = JDBC.getConnection();
+             PreparedStatement ps = con.prepareStatement(UserQuery.LOGIN_QUERY)) {
+            ps.setString(1, national_code);
+            ps.setString(2, password);
 
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                role = Role.valueOf(rs.getString("role"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    role = Role.valueOf(rs.getString("role"));
+
+                } else {
+                    System.out.println("no user found");
+                }
             }
 
-        } catch (SQLException e) {
-            handleSQLException("ERROR RETRIVEING USERS: " + e.getMessage(), e);
-        }
 
+        } catch (SQLException e) {
+            handleSQLException("Error retrieving users: " + e.getMessage(), e);
+        }
         return role;
     }
+
 
     private User mapUser(ResultSet rs) throws SQLException {
         User user = new User();
@@ -131,6 +137,7 @@ public class UserRepo {
         user.setLastName(rs.getString("lastname"));
         user.setPassword(rs.getString("password"));
         user.setRole(Role.valueOf(rs.getString("role")));
+        user.setCardNumber(rs.getString("numberCard"));
         return user;
     }
 

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 
-public class BaseEntity extends Address {
+public class BaseEntity  {
     private long id;
     private Timestamp registerDate = Timestamp.valueOf(LocalDateTime.now());
 }
