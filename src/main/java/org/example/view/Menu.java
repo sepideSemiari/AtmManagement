@@ -181,7 +181,7 @@ public class Menu {
         authController.register(dto);
     }
 
-    private static void customerMenu() throws Exception {
+    private static void customerMenu()  {
         aa:
         while (true) {
             System.out.println("""
@@ -231,7 +231,7 @@ public class Menu {
         int indexHistory=0;
     }
 
-    private static double transfer(String yourAccountNumber, String destinationCardNumber, double amount) throws Exception {
+    private static double transfer(String yourAccountNumber, String destinationCardNumber, double amount)  {
         double yourBalance = accountController.balance(yourAccountNumber);
         double destinationBalance = accountController.balance(destinationCardNumber);
 
@@ -243,7 +243,7 @@ public class Menu {
 
         }
         else {
-            throw new Exception("process is not enough");
+            throw new AccountException("process is not enough");
         }
     }
 

@@ -102,35 +102,13 @@ public class UserRepo {
         return userList;
     }
 
-//    public Role login(String national_code, String password) {
-//        Role role = null;
-//        try (Connection con = JDBC.getConnection();
-//             PreparedStatement ps = con.prepareStatement(UserQuery.LOGIN_QUERY)) {
-//            ps.setString(1, national_code);
-//            ps.setString(2, password);
-//
-//            try (ResultSet rs = ps.executeQuery()) {
-//                if (rs.next()) {
-//                    role = Role.valueOf(rs.getString("role"));
-//
-//                } else {
-//                    System.out.println("no user found");
-//                }
-//            }
-//
-//
-//        } catch (SQLException e) {
-//            handleSQLException("Error retrieving users: " + e.getMessage(), e);
-//        }
-//        return role;
-//    }
 
     public Role login(String national_code, String password){
         Role role = null;
         try(Connection con = JDBC.getConnection();
         PreparedStatement ps = con.prepareStatement(UserQuery.LOGIN_QUERY)){
             ps.setString(1,national_code);
-            ps.setString(1,password);
+            ps.setString(2,password);
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()){

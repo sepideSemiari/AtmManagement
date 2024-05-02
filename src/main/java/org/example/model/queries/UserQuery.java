@@ -3,7 +3,7 @@ package org.example.model.queries;
 public class UserQuery {
     public final static String CREATE_TABLE = """
             create table if not exists tb_user(
-            id  serial primary key,
+            id  serial,
             register_date timestamp with time zone,
             national_code varchar(10),
             firstName varchar(50),
@@ -11,7 +11,7 @@ public class UserQuery {
             password varchar(50),
             address varchar(200),
             role varchar(20),
-            numberCard varchar(16)
+            numberCard varchar(16) primary key
             )
             """;
 
